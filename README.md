@@ -11,3 +11,7 @@ My solutions to some UVaOJ problems.
   - Chapter 4 Functions and Recursion (Difficulty: ★★☆☆☆)
     - [Examples](https://github.com/fang-ling/UVaOJ/tree/main/Beginning%20Algorithm%20Contests/Chapter%204%20Functions%20and%20Recursion/Examples) (6 solved / 6 in total)
     - [Exercises](https://github.com/fang-ling/UVaOJ/tree/main/Beginning%20Algorithm%20Contests/Chapter%204%20Functions%20and%20Recursion/Exercises) (10 solved / 10 in total)
+
+## Milestone
+
+- February 7, 2023. 50th Problem: [540 - Team Queue](https://onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&category=835&page=show_problem&problem=481)
