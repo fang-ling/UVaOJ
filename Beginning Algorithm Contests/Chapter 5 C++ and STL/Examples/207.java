@@ -48,7 +48,7 @@ class Main {
             new LinkedList<LinkedList<Player>>();
         while ((cases -= 1) >= 0) {
             players.clear();
-            //dq_list.clear();
+            dq_list.clear();
             //output.clear();
             //am_list.clear();
             //money.clear();
@@ -88,9 +88,9 @@ class Main {
                         }
                     }
                 }
-                if (p.tot36 != -1) {
+                //if (p.tot36 != -1) {
                     players.add(p);
-                }
+                    //}
             }
             /* Sort: make the cut */
             Collections.sort(players, (p1, p2) -> {
@@ -119,6 +119,13 @@ class Main {
                     }
                     return p1.name.compareTo(p2.name);
                 });
+            /*dq_list =
+                new ArrayList<Player>(players
+                                      .stream()
+                                      .filter(p1 -> p1.is_dq)
+                                      .collect(Collectors.toList()));
+            players.removeAll(dq_list);
+            players.addAll(dq_list);*/
             /* Print result */
             System.out.println("Player Name          Place     RD1  RD2  RD3" +
                                "  RD4  TOTAL     Money Won\n" +
@@ -185,7 +192,9 @@ class Main {
                     i += 1;
                 }
             }
-            System.out.println();
+            if (cases > 0) {
+                System.out.println();
+            }
         }
     }
 }
