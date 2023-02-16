@@ -4,11 +4,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashSet;
-import java.util.LinkedList;
 import java.util.Scanner;
-import java.util.stream.Collectors;
 
 class Main {
     static int find_tie_rank_count(ArrayList<Player> players) {
@@ -29,29 +25,14 @@ class Main {
 
         int cases = stdin.nextInt();
         BigDecimal purse = null;
-        double purse_left = 0;
-        //final int BIAS = 10000;
         int n = 0;
-        int m = 0;
-        int rd = 0;
         String delta = null;
         String[] alpha = null;
         Player p = null;
-        //double[] percents = new double[70];
         BigDecimal[] percents = new BigDecimal[70];
         ArrayList<Player> players = new ArrayList<Player>();
-        ArrayList<Player> dq_list = new ArrayList<Player>();
-        ArrayList<Player> am_list = new ArrayList<Player>();
-        LinkedList<LinkedList<Player>> output =
-            new LinkedList<LinkedList<Player>>();
-        LinkedList<LinkedList<Player>> money =
-            new LinkedList<LinkedList<Player>>();
         while ((cases -= 1) >= 0) {
             players.clear();
-            dq_list.clear();
-            //output.clear();
-            //am_list.clear();
-            //money.clear();
 
             /* Input part 1, money */
             purse = new BigDecimal(stdin.next());
@@ -88,15 +69,23 @@ class Main {
                         }
                     }
                 }
-                //if (p.tot36 != -1) {
-                    players.add(p);
-                    //}
+                players.add(p);
             }
             /* Sort: make the cut */
             Collections.sort(players, (p1, p2) -> {
+                    if (p1.tot36 < 0 && p2.tot36 < 0) {
+                        return 0;
+                    }
+                    if (p1.tot36 < 0) {
+                        return 1;
+                    }
+                    if (p2.tot36 < 0) {
+                        return -1;
+                    }
                     return Integer.compare(p1.tot36, p2.tot36);
                 });
             n = find_tie_rank_count(players);
+            players = new ArrayList<Player>(players.subList(0, n));
             /* Sort: ranklist */
             Collections.sort(players, (p1, p2) -> {
                     if (p1.is_dq && p2.is_dq) {
@@ -119,13 +108,6 @@ class Main {
                     }
                     return p1.name.compareTo(p2.name);
                 });
-            /*dq_list =
-                new ArrayList<Player>(players
-                                      .stream()
-                                      .filter(p1 -> p1.is_dq)
-                                      .collect(Collectors.toList()));
-            players.removeAll(dq_list);
-            players.addAll(dq_list);*/
             /* Print result */
             System.out.println("Player Name          Place     RD1  RD2  RD3" +
                                "  RD4  TOTAL     Money Won\n" +
@@ -210,10 +192,6 @@ class Player {
     int tot36;
     int rounds;
 
-    //String rank;
-    //double award;
-    //boolean is_no_money;
-
     Player(String name) {
         this.name = name;
         round = new int[4];
@@ -221,6 +199,5 @@ class Player {
         is_dq = false;
         tot36 = 0;
         tot72 = 0;
-        //is_no_money = false;
     }
 }
